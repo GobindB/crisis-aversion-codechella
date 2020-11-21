@@ -16,8 +16,8 @@ def before():
     print("This is executed BEFORE each request.")
 
 # Create a URL route in our application for "/"
-@app.route('/request/<string:location>/<string:keyword>/', methods=['GET'])
-def home(location, keyword):
+@app.route('/request/location=<string:locations>/keywords=<string:keyword>/languages=<string:languages>', methods=['GET'])
+def home(location, keyword, languages, locations):
     """
     This function responds to the browser ULR
     localhost:5000/request/<location>/<keyword%20keyword%20keyword>
@@ -33,7 +33,7 @@ def home(location, keyword):
     hashtags = []
     
     # TODO: response will always be an empty object; must store tweets on stream from on_status method
-    response = get_tweets(keywords)
+    response = get_tweets(keywords, languages, locations)
     
     if len(response) > 0:
         status_code = 200
