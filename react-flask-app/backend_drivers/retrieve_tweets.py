@@ -13,19 +13,17 @@ class TweetListener(tweepy.StreamListener):
 
     def on_status(self, tweet):
         """
-        Process the tweets and save them to a flask database???
+        Process the tweets and save them to a PyMySQL AWS database
         """
         print(f"Processing tweet id {tweet.id}\n")
         print(f"Tweet: {tweet.text}\n")
         
-        # TODO: pass tweet content to misinformation module and store tweet ID
-        # and validity score in a buffer for n number of tweets per request,
         # serve this ID and score to the client
         score = calculate_validity_score(tweet)
 
-        self.store_data(tweet, score)
+        # self.insert_into_database(tweet, score)
     
-    def store_data(tweet, validity_score):
+    def insert_into_database(tweet, validity_score):
         db = pymysql.connect(os.getenv("host"), user='admin', passwd=os.getenv("db_pw"), db='twitter', charset="utf8")
         cursor = db.cursor()
         insert_query = "INSERT INTO twitter (tweet_id, user_handle, created_at, text, validity_score) VALUES (%s, %s, %s, %s, %s)"
@@ -46,5 +44,5 @@ def get_tweets(keywords):
     stream = tweepy.Stream(api.auth, tweets_listener)
     stream.filter(track=keywords, languages=["en"])
 
-if __name__ == "main":
+if __name__ == "__main__":
     get_tweets(["Codechella"])

@@ -19,10 +19,13 @@ def before():
 @app.route('/request/<string:location>/<string:keyword>/', methods=['GET'])
 def home(location, keyword):
     """
-    This function just responds to the browser ULR
-    localhost:5000/
+    This function responds to the browser ULR
+    localhost:5000/request/<location>/<keyword%20keyword%20keyword>
 
-    :return:        the rendered template 'home.html'
+    where <______> represents a parameter passed to url
+    and %20 is a delimeter splitting keywords and hashtags
+
+    :return:        '
     """
     # return json serialized response and status code
     # return error code if json is NULL
