@@ -12,8 +12,6 @@ class TweetListener(tweepy.StreamListener):
         print(f"Tweet: {tweet.text}\n")
         self.filtered_responses[tweet.id] = tweet.text
         
-        assert "aid" in string.lower(tweet.text)
-
     def on_error(self, status):
         print(f"Error: {status}")
 

@@ -1,3 +1,5 @@
+#!flask/bin/python
+
 from flask import (
     Flask,
     render_template,
@@ -25,8 +27,13 @@ def home(location, keyword):
     # return json serialized response and status code
     # return error code if json is NULL
     response = get_tweets([keyword])
+    
+    if len(response) > 0:
+        status_code = 200
+    else:
+        status_code = 500
 
-    return jsonify(response), 200
+    return jsonify(response), status_code
 
 
 # If we're running in stand alone mode, run the application
