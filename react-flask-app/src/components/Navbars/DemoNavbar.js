@@ -36,7 +36,7 @@ import {
   Container,
   Row,
   Col,
-  UncontrolledTooltip
+  UncontrolledTooltip,
 } from "reactstrap";
 
 class DemoNavbar extends React.Component {
@@ -47,18 +47,18 @@ class DemoNavbar extends React.Component {
   }
   state = {
     collapseClasses: "",
-    collapseOpen: false
+    collapseOpen: false,
   };
 
   onExiting = () => {
     this.setState({
-      collapseClasses: "collapsing-out"
+      collapseClasses: "collapsing-out",
     });
   };
 
   onExited = () => {
     this.setState({
-      collapseClasses: ""
+      collapseClasses: "",
     });
   };
 
@@ -73,10 +73,7 @@ class DemoNavbar extends React.Component {
           >
             <Container>
               <NavbarBrand className="mr-lg-10" to="/" tag={Link}>
-                <img
-                  alt="..."
-                  src={require("assets/img/crisis.png")}
-                />
+                <img alt="..." src={require("assets/img/crisis.png")} />
               </NavbarBrand>
               <button className="navbar-toggler" id="navbar_global">
                 <span className="navbar-toggler-icon" />
@@ -98,25 +95,7 @@ class DemoNavbar extends React.Component {
                       <div className="dropdown-menu-inner">
                         <Media
                           className="d-flex align-items-center"
-                          href="#"
-                          target="_blank"
-                        >
-                          <div className="icon icon-shape bg-gradient-success rounded-circle text-white">
-                            <i className="ni ni-circle-08" />
-                          </div>
-                          <Media body className="ml-3">
-                            <h6 className="heading text-primary mb-md-1">
-                              For citzens
-                            </h6>
-                            <p className="description d-none d-md-inline-block mb-0">
-                            See information about crisis zones with confidence in validity
-                            </p>
-                          </Media>
-                        </Media>
-                        <Media
-                          className="d-flex align-items-center"
-                          href="#"
-                          target="_blank"
+                          href="#responders"
                         >
                           <div className="icon icon-shape bg-gradient-warning rounded-circle text-white">
                             <i className="ni ni-ambulance" />
@@ -126,7 +105,8 @@ class DemoNavbar extends React.Component {
                               For responders
                             </h5>
                             <p className="description d-none d-md-inline-block mb-0">
-                            See information and visualize data about crisis zones with confidence in validity
+                              See information and visualize data about crisis
+                              zones with confidence in validity
                             </p>
                           </Media>
                         </Media>
