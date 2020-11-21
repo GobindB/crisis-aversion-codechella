@@ -1,12 +1,17 @@
 from flask import (
     Flask,
-    render_template
+    render_template,
+    jsonify
 )
 
-from retrieve_tweets import main
+from retrieve_tweets import get_tweets
 
 # Create the application instance
 app = Flask(__name__, template_folder="templates")
+
+@app.before_request
+def before():
+    print("This is executed BEFORE each request.")
 
 # Create a URL route in our application for "/"
 @app.route('/<string:location>/<string:keyword>/', methods=['GET'])
@@ -17,11 +22,13 @@ def home(location, keyword):
 
     :return:        the rendered template 'home.html'
     """
-    # return render_template('home.html')
-    return "Location: " + location + " Keyword: " + keyword
+    # return json serialized response and status code
+    # return error code if json is NULL
+    response = get_tweets([keyword])
+
+    return jsonify(response), 200
 
 
 # If we're running in stand alone mode, run the application
 if __name__ == '__main__':
-
     app.run(debug=True)
