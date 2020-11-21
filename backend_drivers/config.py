@@ -1,13 +1,11 @@
 from dotenv import load_dotenv
+
 load_dotenv()
 
 import tweepy
-import logging
 import os
 
-logger = logging.getLogger()
-
-def create_API():
+def create_api():
     CONSUMER_KEY = os.getenv("API_key")
     CONSUMER_SECRET = os.getenv("API_key_secret")
     ACCESS_TOKEN = os.getenv("access_token")
@@ -23,7 +21,7 @@ def create_API():
     try:
         api.verify_credentials()
     except Exception as e:
-        logger.error("Error creating API", exc_info=True)
+        print("Error creating API")
         raise e
-    logger.log("Succesful creation of API.")
+    print("Succesful creation of API.")
     return api
