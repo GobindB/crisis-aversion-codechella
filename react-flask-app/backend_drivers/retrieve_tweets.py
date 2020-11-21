@@ -1,24 +1,48 @@
 import tweepy
+import pymysql
+import dotenv
+import json, string, os
 from config import create_api
-import json, string
+from misinformation_model import calculate_validity_score
+
 
 class TweetListener(tweepy.StreamListener):
     def __init__(self, api):
         self.api = api
-        self.filtered_responses = {}
+        self.keywords = []
 
     def on_status(self, tweet):
+        """
+        Process the tweets and save them to a PyMySQL AWS database
+        """
         print(f"Processing tweet id {tweet.id}\n")
         print(f"Tweet: {tweet.text}\n")
-        self.filtered_responses[tweet.id] = tweet.text
         
+        # serve this ID and score to the client
+        score = calculate_validity_score(tweet)
+
+        # self.insert_into_database(tweet, score)
+    
+    def insert_into_database(tweet, validity_score):
+        db = pymysql.connect(os.getenv("host"), user='admin', passwd=os.getenv("db_pw"), db='twitter', charset="utf8")
+        cursor = db.cursor()
+        insert_query = "INSERT INTO twitter (tweet_id, user_handle, created_at, text, validity_score) VALUES (%s, %s, %s, %s, %s)"
+        cursor.execute(insert_query, (tweet.id, tweet.user.screen_name, tweet.created_at, tweet.text, validity_score))
+        db.commit()
+        print("\n ADD SUCCESS \n")
+        cursor.close()
+        db.close()
+        return
+
     def on_error(self, status):
         print(f"Error: {status}")
 
 def get_tweets(keywords):
     api = create_api()
     tweets_listener = TweetListener(api)
+    tweets_listener.keywords = keywords
     stream = tweepy.Stream(api.auth, tweets_listener)
     stream.filter(track=keywords, languages=["en"])
-    if len(tweets_listener.filtered_responses) == 3:
-        return tweets_listener.filtered_responses
+
+if __name__ == "__main__":
+    get_tweets(["Codechella"])

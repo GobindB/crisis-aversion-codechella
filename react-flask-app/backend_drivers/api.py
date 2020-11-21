@@ -16,17 +16,24 @@ def before():
     print("This is executed BEFORE each request.")
 
 # Create a URL route in our application for "/"
-@app.route('/<string:location>/<string:keyword>/', methods=['GET'])
+@app.route('/request/<string:location>/<string:keyword>/', methods=['GET'])
 def home(location, keyword):
     """
-    This function just responds to the browser ULR
-    localhost:5000/
+    This function responds to the browser ULR
+    localhost:5000/request/<location>/<keyword%20keyword%20keyword>
 
-    :return:        the rendered template 'home.html'
+    where <______> represents a parameter passed to url
+    and %20 is a delimeter splitting keywords and hashtags
+
+    :return:        '
     """
     # return json serialized response and status code
     # return error code if json is NULL
-    response = get_tweets([keyword])
+    keywords = keyword.split("%20")
+    hashtags = []
+    
+    # TODO: response will always be an empty object; must store tweets on stream from on_status method
+    response = get_tweets(keywords)
     
     if len(response) > 0:
         status_code = 200
