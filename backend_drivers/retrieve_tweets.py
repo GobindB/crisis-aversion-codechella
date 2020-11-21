@@ -2,7 +2,7 @@
 
 import tweepy
 import logging
-from config import create_api
+from config import config
 import time
 
 logging.basicConfig(level=logging.INFO)
@@ -10,6 +10,7 @@ logger = logging.getLogger()
 
 def follow_followers(api):
     logger.info("Retrieving and following followers")
+    print('suc')
     for follower in tweepy.Cursor(api.followers).items():
         if not follower.following:
             logger.info(f"Following {follower.name}")
