@@ -11,7 +11,7 @@ class TweetListener(tweepy.StreamListener):
         self.api = api
         self.responses = []
         self.num_tweets = 0
-        self.limit = 2
+        self.limit = 10
     
     def increment_num_tweets(self):
         self.num_tweets += 1
