@@ -1,20 +1,24 @@
 import tweepy
 from config import create_api
-import time
+import json
 
-def follow_followers(api):
-    print("Retrieving and following followers")
-    for follower in tweepy.Cursor(api.followers).items():
-        if not follower.following:
-            print(f"Following {follower.name}")
-            follower.follow()
+class TweetListener(tweepy.StreamListener):
+    def __init__(self, api):
+        self.api = api
 
-def main():
+    def on_status(self, tweet):
+        print(f"Processing tweet id {tweet.id}\n")
+        print(f"Tweet: {tweet.text}\n")
+
+    def on_error(self, status):
+        print(f"Error: {status}")
+
+def main(keywords):
     api = create_api()
-    while True:
-        follow_followers(api)
-        print("Waiting...")
-        time.sleep(60)
+    tweets_listener = TweetListener(api)
+    stream = tweepy.Stream(api.auth, tweets_listener)
+    stream.filter(track=keywords, languages=["en"])
+    # return 5 tweets
 
 if __name__ == "__main__":
-    main()
+    main(["Python", "Tweepy"])
