@@ -1,10 +1,18 @@
-# Getting Started with Create React App
+# Getting Started CodeChella App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Starting instructions
 
-## Available Scripts
+1. ### `yarn start-api`
+2. ### `yarn start`
 
 In the project directory, you can run:
+
+### `yarn start-api`
+
+Runs the api in the development mode.\
+Open [http://localhost:5000](http://localhost:5000) to view it in the browser.
+
+This api retrieves tweets on the tweet filter stream
 
 ### `npm start`
 
