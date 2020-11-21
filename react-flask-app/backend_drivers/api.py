@@ -1,4 +1,4 @@
-#!flask/bin/python
+#!venv/bin/python3
 
 from flask import (
     Flask,
@@ -7,13 +7,19 @@ from flask import (
 )
 
 from retrieve_tweets import get_tweets
+import os
+
 
 # Create the application instance
-app = Flask(__name__, template_folder="templates")
+app = Flask(__name__, template_folder="templates", static_folder="../build", static_url_path='/home')
 
-@app.before_request
-def before():
-    print("This is executed BEFORE each request.")
+@app.route("/home")
+def index():
+    return app.send_static_file('index.html')
+
+@app.errorhandler(404)
+def not_found(e):
+    return app.send_static_file('index.html')
 
 # Create a URL route in our application for "/"
 @app.route('/request/location=<string:location>/keywords=<string:keyword>/languages=<string:languages>', methods=['GET'])
@@ -45,4 +51,5 @@ def home(location, keyword, languages):
 
 # If we're running in stand alone mode, run the application
 if __name__ == '__main__':
-    app.run(debug=True)
+    # app.run(debug=True)
+    app.run(host='0.0.0.0', debug=False, port=os.environ.get('PORT', 80))

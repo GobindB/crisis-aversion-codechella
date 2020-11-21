@@ -1,11 +1,14 @@
 import tweepy
 import pymysql
 import dotenv
+import logging
 import json, string, os, time
 from config import create_api
 from misinformation_model import calculate_validity_score
 
+logging.basicConfig(filename='app.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s')
 
+# gets 10 most recent tweets according to filter parameters
 class TweetListener(tweepy.StreamListener):
     def __init__(self, api):
         self.api = api
@@ -20,8 +23,8 @@ class TweetListener(tweepy.StreamListener):
         """
         Process the tweets and save them to a PyMySQL AWS database
         """
-        print(f"Processing tweet id {tweet.id}\n")
-        print(f"Tweet: {tweet.text}\n")
+        logging.info(f"Processing tweet id {tweet.id}\n")
+        logging.info(f"Tweet: {tweet.text}\n")
         
         # serve this ID and score to the client
         score = calculate_validity_score(tweet)
@@ -45,13 +48,13 @@ class TweetListener(tweepy.StreamListener):
         insert_query = "INSERT INTO twitter (tweet_id, user_handle, created_at, text, validity_score) VALUES (%s, %s, %s, %s, %s)"
         cursor.execute(insert_query, (tweet_id, screen_name, created_at, text, validity_score))
         db.commit()
-        print("\n ADD SUCCESS \n")
+        logging.info("Data added to AWS RDBMS succesfuly")
         cursor.close()
         db.close()
         return
 
     def on_error(self, status):
-        print(f"Error: {status}")
+        logging.error(f"Error: {status}")
 
 # get hashtags
 # this may not work because the filter may not be able to get all together
@@ -61,9 +64,8 @@ def get_tweets(keywords, languages, locations):
     tweets_listener.keywords = keywords
     tweet_stream = tweepy.Stream(api.auth, tweets_listener, wait_on_rate_limit=True,wait_on_rate_limit_notify=True)
     tweet_stream.filter(track=keywords, languages=languages,locations=locations)
-    tweets_listener.increment_num_tweets()
-
     return tweets_listener.responses
 
 if __name__ == "__main__":
+    # test case
     get_tweets(["Python"], ["en"], [-6.38,49.87,1.77,55.81])

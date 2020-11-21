@@ -1,4 +1,6 @@
+from logging import log
 from dotenv import load_dotenv
+import logging
 
 load_dotenv()
 
@@ -21,7 +23,7 @@ def create_api():
     try:
         api.verify_credentials()
     except Exception as e:
-        print("Error creating API")
+        logging.error("Error creating API")
         raise e
-    print("Succesful creation of API.")
+    logging.info("Succesful creation of API.")
     return api
