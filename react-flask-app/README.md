@@ -1,8 +1,14 @@
 # Getting Started CodeChella App
 
-## Starting instructions
+## Starting instructions to instantiate dev environment
 
-1. ### `yarn start-api`
+1. ### `cd crisis-aversion-codechella/react-flask-app/backend_drivers/`
+2. ### `python3 -m venv venv`
+3. ### `source venv/bin/activate`
+4. ### `pip3 install -r requirements.txt`
+5. ### `cd ..`
+6. ### `yarn install`
+2. ### `yarn start-api`
 2. ### `yarn start`
 
 In the project directory, you can run:
