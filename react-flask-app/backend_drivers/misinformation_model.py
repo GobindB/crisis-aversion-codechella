@@ -93,6 +93,7 @@ def create_corpus(df):
 
 def instantiate_matrix(df, corpus):
 
+
     MAX_LEN = 50
     tokenizer_obj = Tokenizer()
     tokenizer_obj.fit_on_texts(corpus)

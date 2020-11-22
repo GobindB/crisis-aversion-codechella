@@ -83,7 +83,7 @@ Backend
 
 **Product roadmap/timeline**
 
-**First review** _**20th (11pm EST) (10pm CT) (8pm PST)**_ _ **:** _
+**First review** **20th (11pm EST) (10pm CT) (8pm PST) **:** 
 
 1. Misinformation logic and tweet storage database first rev - **Gobind**
 
@@ -92,7 +92,7 @@ Backend
 3. Web app mockup &amp; skeleton
  (answer questions about database, hosting and full stack linking to our endpoints - we need to discuss how you want to receive data and what data you want to receive i.e the ID of a tweet for you to fetch to embed on the page) - **Luisa**
 
-**Second review** _**21st (2pm EST) (1pm CT) (11am PST)**__ **:** _
+**Second review** **21st (2pm EST) (1pm CT) (11am PST)** **:** 
 
 1. Misinformation logic and tweet storage database complete Data Visualization - **Gobind**
 
@@ -100,7 +100,7 @@ Backend
 
 3. Webpage functional &amp; start tying into backend - **Frontend Team**
 
-**Final review** _**21st (11pm EST) (10pm CT) (8pm PST)**__ **:** _
+**Final review** **21st (11pm EST) (10pm CT) (8pm PST)** **:**
 
 1. Fully functional application with Backend and Frontend Tied into each other and us as users doing testing. **Gobind**
 2. Video for submission purposes

@@ -39,6 +39,7 @@ class TweetListener(tweepy.StreamListener):
             # serve this ID and score to the client
             score = calculate_validity_score(tweet, self.model)
 
+
             # TODO: extended text
             self.insert_into_database(
                 tweet.created_at, tweet.text, tweet.user.screen_name, tweet.id, score)
