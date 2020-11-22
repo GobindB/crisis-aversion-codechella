@@ -15,8 +15,6 @@ from tensorflow import keras
 
 import os
 
-reconstructed_model = keras.models.load_model("my_model")
-
 # Create the application instance
 app = Flask(__name__, template_folder="templates",
             static_folder="../build", static_url_path='/home')
@@ -50,7 +48,7 @@ def home(location, keyword, languages):
     keywords = keyword.split("%20")
     location = [float(coordinate) for coordinate in location.split(",")]
     languages = languages.split(",")
-
+    reconstructed_model = keras.models.load_model("my_model")
     response = get_tweets(keywords, languages, location, reconstructed_model)
 
     if len(response) > 0:
