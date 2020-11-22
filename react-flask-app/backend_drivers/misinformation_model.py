@@ -1,6 +1,6 @@
-import numpy as np
-import tensorflow as tf
-from tensorflow import keras
+# take tweet and pass it to the model
+def calculate_validity_score(tweet, reconstructed_model):
+    prediction = reconstructed_model.predict(input)
+    return prediction
 
-reconstructed_model = keras.models.load_model("my_model")
-
+# data processing
