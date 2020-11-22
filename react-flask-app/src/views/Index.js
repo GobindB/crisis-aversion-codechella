@@ -32,6 +32,7 @@ import {
   InputGroupAddon,
   InputGroupText,
   InputGroup,
+  Label,
 } from "reactstrap";
 
 // core components
@@ -106,31 +107,47 @@ class Landing extends React.Component {
                     <Row>
                       <Col md="12">
                         <FormGroup>
-                          <InputGroup className="mb-4">
-                            <InputGroupAddon addonType="prepend">
-                              <InputGroupText>
-                                <i className="ni ni-zoom-split-in" />
-                              </InputGroupText>
-                            </InputGroupAddon>
-                            <Input placeholder="Search location" type="text" />
-                          </InputGroup>
+                          <Label for="exampleSelect">
+                            Select crisis location
+                          </Label>
+                          <Input type="select" name="location" id="location">
+                            <option
+                              value="[
+                                [-105.301758, 39.964069],
+                                [-105.301758, 40.094551],
+                                [-105.178142, 40.094551],
+                                [-105.178142, 39.964069]
+                               ]"
+                            >
+                              Boulder, Colorado, US
+                            </option>
+                            <option value="[[-74.259090,40.477398],[-73.700180,40.477398],[-73.700180,40.916178],[-74.259090,40.916178]]">
+                              New York City, New York, US
+                            </option>
+                            <option value="[[-80.319760,25.709051],[-80.139157,25.709051],[-80.139157,25.855782]]">
+                              Miami, Florida, US
+                            </option>
+                            <option value="[[-122.459696,47.481002],[-122.224433,47.481002],[-122.224433,47.734135],[-122.459696,47.734135]]">
+                              Seattle, Washington, US
+                            </option>
+                          </Input>
                         </FormGroup>
                       </Col>
                     </Row>
                     <p>Categories</p>
                     <Row>
-                      <Col md="6">
+                      <Col md="4">
                         <div className="custom-control custom-checkbox mb-3">
                           <input
                             className="custom-control-input"
-                            id="help"
+                            id="bombing"
                             type="checkbox"
                           />
                           <label
                             className="custom-control-label"
-                            htmlFor="help"
+                            htmlFor="bombing"
                           >
-                            Help
+                            Bombing
                           </label>
                         </div>
                         <div className="custom-control custom-checkbox mb-3">
@@ -144,31 +161,59 @@ class Landing extends React.Component {
                           </label>
                         </div>
                       </Col>
-                      <Col md="6">
+                      <Col md="4">
                         <div className="custom-control custom-checkbox mb-3">
                           <input
                             className="custom-control-input"
-                            id="hurt"
+                            id="wildfire"
                             type="checkbox"
                           />
                           <label
                             className="custom-control-label"
-                            htmlFor="hurt"
+                            htmlFor="wildfire"
                           >
-                            Hurt
+                            Wildfire
                           </label>
                         </div>
                         <div className="custom-control custom-checkbox mb-3">
                           <input
                             className="custom-control-input"
-                            id="food"
+                            id="hailstorm"
                             type="checkbox"
                           />
                           <label
                             className="custom-control-label"
-                            htmlFor="food"
+                            htmlFor="hailstorm"
                           >
-                            Food
+                            Hailstorm
+                          </label>
+                        </div>
+                      </Col>
+                      <Col md="4">
+                        <div className="custom-control custom-checkbox mb-3">
+                          <input
+                            className="custom-control-input"
+                            id="earthquake"
+                            type="checkbox"
+                          />
+                          <label
+                            className="custom-control-label"
+                            htmlFor="earthquake"
+                          >
+                            Earthquake
+                          </label>
+                        </div>
+                        <div className="custom-control custom-checkbox mb-3">
+                          <input
+                            className="custom-control-input"
+                            id="floods"
+                            type="checkbox"
+                          />
+                          <label
+                            className="custom-control-label"
+                            htmlFor="floods"
+                          >
+                            Floods
                           </label>
                         </div>
                       </Col>
@@ -275,7 +320,7 @@ class Landing extends React.Component {
                 </Col>
               </Row>
               <Row>
-                <Col className="mb-5 mb-lg-0" lg="3" md="6">
+                <Col className="mb-5 mb-lg-0" lg="4" md="8">
                   <div className="px-4">
                     <img
                       alt="..."
@@ -291,7 +336,7 @@ class Landing extends React.Component {
                     </div>
                   </div>
                 </Col>
-                <Col className="mb-5 mb-lg-0" lg="3" md="6">
+                <Col className="mb-5 mb-lg-0" lg="4" md="8">
                   <div className="px-4">
                     <img
                       alt="..."
@@ -307,7 +352,7 @@ class Landing extends React.Component {
                     </div>
                   </div>
                 </Col>
-                <Col className="mb-5 mb-lg-0" lg="3" md="6">
+                <Col className="mb-5 mb-lg-0" lg="4" md="8">
                   <div className="px-4">
                     <img
                       alt="..."
@@ -318,24 +363,6 @@ class Landing extends React.Component {
                     <div className="pt-4 text-center">
                       <h5 className="title">
                         <span className="d-block mb-1">Gobind Bakhshi</span>
-                        <small className="h6 text-muted">
-                          Backend Developer
-                        </small>
-                      </h5>
-                    </div>
-                  </div>
-                </Col>
-                <Col className="mb-5 mb-lg-0" lg="3" md="6">
-                  <div className="px-4">
-                    <img
-                      alt="..."
-                      className="rounded-circle img-center img-fluid shadow shadow-lg--hover"
-                      src={require("assets/img/team4.jpg")}
-                      style={{ width: "200px" }}
-                    />
-                    <div className="pt-4 text-center">
-                      <h5 className="title">
-                        <span className="d-block mb-1">Rachel Castellino</span>
                         <small className="h6 text-muted">
                           Backend Developer
                         </small>
