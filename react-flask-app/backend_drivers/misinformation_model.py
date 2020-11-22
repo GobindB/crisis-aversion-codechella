@@ -9,8 +9,8 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
-stop = set(stopwords.words('english'))
+# from nltk.corpus import stopwords
+# stop = set(stopwords.words('english'))
 
 # take tweet and pass it to the model
 
@@ -86,7 +86,7 @@ def create_corpus(df):
     corpus = []
     for tweet in tqdm(df['text']):
         words = [word.lower() for word in word_tokenize(
-            tweet) if((word.isalpha() == 1) & (word not in stop))]
+            tweet) if((word.isalpha() == 1))]
         corpus.append(words)
     return corpus
 

@@ -22,9 +22,9 @@ app = Flask(__name__, template_folder="templates",
             static_folder="../build", static_url_path='/home')
 
 
-@app.route("/home")
+@app.route("/")
 def index():
-    return app.send_static_file('index.html')
+    return app.send_static_file('home.html')
 
 
 @app.errorhandler(404)
