@@ -29,11 +29,11 @@ Do they have to enter location or can we use browser to get their location and b
 
 We should give a user predefined categories to select from to get tweets i.e **help, aid, food**
 
-_ **How do we know what regions to run our program in and when?** _
-
+ **How do we know what regions to run our program in and when?** 
+ 
 How do we know what regions have an ongoing crisis? -\&gt; can simplify as mentioned above
 
-_ **How will our app find a crisis zone and start displaying information?** _
+ **How will our app find a crisis zone and start displaying information?** 
 
 If a &quot;verified&quot; crisis we display info otherwise display null? -\&gt; we may be able to simplify this by just using categories to search by at all times (i.e help, food, resources, aid) instead of maintaining a list of current crises
 
@@ -85,16 +85,16 @@ Backend
 
 **First review** _**20th (11pm EST) (10pm CT) (8pm PST)**_ _ **:** _
 
-1. Misinformation logic and tweet storage database first rev - **Rachel**
+1. Misinformation logic and tweet storage database first rev - **Gobind**
 
 2. Tweet filtration/streaming and internal API for frontend first rev - **Gobind**
 
 3. Web app mockup &amp; skeleton
- (answer questions about database, hosting and full stack linking to our endpoints - we need to discuss how you want to receive data and what data you want to receive i.e the ID of a tweet for you to fetch to embed on the page) - **Frontend Team**
+ (answer questions about database, hosting and full stack linking to our endpoints - we need to discuss how you want to receive data and what data you want to receive i.e the ID of a tweet for you to fetch to embed on the page) - **Luisa**
 
 **Second review** _**21st (2pm EST) (1pm CT) (11am PST)**__ **:** _
 
-1. Misinformation logic and tweet storage database complete Data Visualization - **Rachel**
+1. Misinformation logic and tweet storage database complete Data Visualization - **Gobind**
 
 2. Tweet filtration/streaming and internal API for frontend complete - **Gobind**
 
@@ -102,7 +102,7 @@ Backend
 
 **Final review** _**21st (11pm EST) (10pm CT) (8pm PST)**__ **:** _
 
-1. Fully functional application with Backend and Frontend Tied into each other and us as users doing testing.
+1. Fully functional application with Backend and Frontend Tied into each other and us as users doing testing. **Gobind**
 2. Video for submission purposes
 
 **Devpost Submission 22nd (9am EST) (8am CT) (6am PST)**
