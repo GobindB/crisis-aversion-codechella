@@ -1,4 +1,3 @@
-from tensorflow import keras
 import string
 import re
 
@@ -14,20 +13,18 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 stop = set(stopwords.words('english'))
 
-
-reconstructed_model = keras.models.load_model("my_model")
 # take tweet and pass it to the model
 
 
-def calculate_validity_score(tweet, reconstructed_model, keywords):
-    # initialize list of lists TODO:
-    # fix location add .
-    processed_text = process_text(tweet.'text')
+def calculate_validity_score(tweet, reconstructed_model):
 
-    data = [[tweet.id, keywords.join("%20"), "California", processed_text]]
+    processed_text = process_text(tweet.text)
+
+    # TODO: get location
+    data = [[tweet.id, "California", processed_text]]
 
     prediction_df = pd.DataFrame(
-        data, columns=['id', 'keyword', 'location', 'text'])
+        data, columns=['id', 'location', 'text'])
 
     corpus = create_corpus(prediction_df)
     prediction_df = instantiate_matrix(prediction_df, corpus)
@@ -113,9 +110,6 @@ def instantiate_matrix(df, corpus):
     tokenizer_obj.fit_on_texts(corpus)
     sequences = tokenizer_obj.texts_to_sequences(corpus)
 
-    print(corpus)
-    print(sequences)
-
     word_index = tokenizer_obj.word_index
     num_words = len(word_index)+1
     embedding_matrix = np.zeros((num_words, 100))
@@ -131,5 +125,4 @@ def instantiate_matrix(df, corpus):
     tweet_pad = pad_sequences(
         sequences, maxlen=MAX_LEN, truncating='post', padding='post')
 
-    print(tweet_pad)
     return tweet_pad

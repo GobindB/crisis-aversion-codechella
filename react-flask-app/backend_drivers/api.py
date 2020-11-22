@@ -15,7 +15,6 @@ from tensorflow import keras
 
 import os
 
-
 reconstructed_model = keras.models.load_model("my_model")
 
 # Create the application instance
@@ -52,7 +51,7 @@ def home(location, keyword, languages):
     location = [float(coordinate) for coordinate in location.split(",")]
     languages = languages.split(",")
 
-    response = get_tweets(keywords, languages, location, model)
+    response = get_tweets(keywords, languages, location, reconstructed_model)
 
     if len(response) > 0:
         status_code = 200
@@ -64,5 +63,5 @@ def home(location, keyword, languages):
 
 # If we're running in stand alone mode, run the application
 if __name__ == '__main__':
-    # app.run(debug=True)
-    app.run(host='0.0.0.0', debug=False, port=os.environ.get('PORT', 80))
+    app.run(debug=True)
+    # app.run(host='0.0.0.0', debug=False, port=os.environ.get('PORT', 80))
