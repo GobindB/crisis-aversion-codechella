@@ -1,5 +1,7 @@
 #!venv/bin/python3
 
+# TODO: DOCUMENTATION!! && TESTS
+
 from flask import (
     Flask,
     render_template,
