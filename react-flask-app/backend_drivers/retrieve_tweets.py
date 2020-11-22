@@ -21,7 +21,7 @@ class TweetListener(tweepy.StreamListener):
         self.responses = []
         self.model = model
         self.num_tweets = 0
-        self.limit = 10
+        self.limit = 1
 
     def increment_num_tweets(self):
         self.num_tweets += 1
@@ -34,14 +34,14 @@ class TweetListener(tweepy.StreamListener):
         logging.info(f"Tweet: {tweet.text}\n")
 
         # serve this ID and score to the client
-        score = calculate_validity_score(tweet)
+        score = calculate_validity_score(tweet, self.model)
 
         # TODO: extended text
         self.insert_into_database(
             tweet.created_at, tweet.text, tweet.user.screen_name, tweet.id, score)
 
         response = {'id': tweet.id, 'handle': tweet.user.screen_name,
-                    'created_at': tweet.created_at, 'text': tweet.text}
+                    'created_at': tweet.created_at, 'text': tweet.text, 'validity_score': float(score)}
         self.responses.append(response)
 
         self.increment_num_tweets()
@@ -56,8 +56,9 @@ class TweetListener(tweepy.StreamListener):
             "db_pw"), db='twitter', charset="utf8")
         cursor = db.cursor()
         insert_query = "INSERT INTO twitter (tweet_id, user_handle, created_at, text, validity_score) VALUES (%s, %s, %s, %s, %s)"
+        final_score = float(validity_score[0][0])
         cursor.execute(insert_query, (tweet_id, screen_name,
-                                      created_at, text, validity_score))
+                                      created_at, text, final_score))
         db.commit()
         logging.info("Data added to AWS RDBMS succesfuly")
         cursor.close()
