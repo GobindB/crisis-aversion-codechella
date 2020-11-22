@@ -34,7 +34,7 @@ def not_found(e):
 # Create a URL route in our application for "/"
 
 
-@app.route('/request/location=<string:location>/keywords=<string:keyword>/languages=<string:languages>', methods=['GET'])
+@app.route('/request/location=<string:location>&keywords=<string:keyword>&languages=<string:languages>', methods=['GET'])
 def home(location, keyword, languages):
     """
     This function responds to the browser ULR
