@@ -5,7 +5,6 @@ from numpy.matrixlib.defmatrix import matrix
 from keras.preprocessing.sequence import pad_sequences
 from keras.preprocessing.text import Tokenizer
 from pandas.core.frame import DataFrame
-# from spellchecker import SpellChecker
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
@@ -70,9 +69,6 @@ def remove_emoji(text):
 def remove_punct(text):
     table = str.maketrans('', '', string.punctuation)
     return text.translate(table)
-
-
-# spell = SpellChecker()
 
 
 def correct_spellings(text):
