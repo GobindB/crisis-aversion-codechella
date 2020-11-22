@@ -92,31 +92,11 @@ def create_corpus(df):
 
 
 def instantiate_matrix(df, corpus):
-    embedding_dict = {}
-    with open('glove.6B.100d.txt', 'r') as f:
-        for line in f:
-            values = line.split()
-            word = values[0]
-            vectors = np.asarray(values[1:], 'float32')
-            embedding_dict[word] = vectors
-    f.close()
 
     MAX_LEN = 50
     tokenizer_obj = Tokenizer()
     tokenizer_obj.fit_on_texts(corpus)
     sequences = tokenizer_obj.texts_to_sequences(corpus)
-
-    word_index = tokenizer_obj.word_index
-    num_words = len(word_index)+1
-    embedding_matrix = np.zeros((num_words, 100))
-
-    for word, i in tqdm(word_index.items()):
-        if i > num_words:
-            continue
-
-        emb_vec = embedding_dict.get(word)
-        if emb_vec is not None:
-            embedding_matrix[i] = emb_vec
 
     tweet_pad = pad_sequences(
         sequences, maxlen=MAX_LEN, truncating='post', padding='post')
