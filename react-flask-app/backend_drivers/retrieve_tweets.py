@@ -34,7 +34,7 @@ class TweetListener(tweepy.StreamListener):
         logging.info(f"Tweet: {tweet.text}\n")
 
         # serve this ID and score to the client
-        score = calculate_validity_score(tweet)
+        score = calculate_validity_score(tweet, self.model)
 
         # TODO: extended text
         self.insert_into_database(
