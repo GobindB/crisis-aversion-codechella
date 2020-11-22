@@ -10,8 +10,8 @@ from flask import (
 
 from retrieve_tweets import get_tweets
 import numpy as np
-import tensorflow-cpu as tf
-from tensorflow-cpu import keras
+import tensorflow as tf
+from tensorflow import keras
 
 import os
 

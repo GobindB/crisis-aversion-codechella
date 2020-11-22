@@ -152,3 +152,4 @@ Werkzeug==1.0.1
 wrapt==1.12.1
 zope.interface==5.1.0
 gunicorn==20.0.4
+keras==2.4.3
