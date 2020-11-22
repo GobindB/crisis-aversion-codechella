@@ -16,9 +16,10 @@ logging.basicConfig(filename='app.log', filemode='w',
 
 
 class TweetListener(tweepy.StreamListener):
-    def __init__(self, api, model):
+    def __init__(self, api, model, keywords):
         self.api = api
         self.responses = []
+        self.keywords = keywords
         self.model = model
         self.num_tweets = 0
         self.limit = 1
@@ -33,22 +34,24 @@ class TweetListener(tweepy.StreamListener):
         logging.info(f"Processing tweet id {tweet.id}\n")
         logging.info(f"Tweet: {tweet.text}\n")
 
-        # serve this ID and score to the client
-        score = calculate_validity_score(tweet, self.model)
+        # assume keyword in text due to high frequency usage in crisis event
+        if any(word in tweet.text for word in self.keywords):
+            # serve this ID and score to the client
+            score = calculate_validity_score(tweet, self.model)
 
-        # TODO: extended text
-        self.insert_into_database(
-            tweet.created_at, tweet.text, tweet.user.screen_name, tweet.id, score)
+            # TODO: extended text
+            self.insert_into_database(
+                tweet.created_at, tweet.text, tweet.user.screen_name, tweet.id, score)
 
-        response = {'id': tweet.id, 'handle': tweet.user.screen_name,
-                    'created_at': tweet.created_at, 'text': tweet.text, 'validity_score': float(score)}
-        self.responses.append(response)
+            response = {'id': tweet.id, 'handle': tweet.user.screen_name,
+                        'created_at': tweet.created_at, 'text': tweet.text, 'validity_score': float(score)}
+            self.responses.append(response)
 
-        self.increment_num_tweets()
-        if self.num_tweets < self.limit:
-            return True
-        else:
-            return False
+            self.increment_num_tweets()
+            if self.num_tweets < self.limit:
+                return True
+            else:
+                return False
 
     # save to database for data analytics
     def insert_into_database(self, created_at, text, screen_name, tweet_id, validity_score):
@@ -74,8 +77,7 @@ class TweetListener(tweepy.StreamListener):
 
 def get_tweets(keywords, languages, locations, model):
     api = create_api()
-    tweets_listener = TweetListener(api, model)
-    tweets_listener.keywords = keywords
+    tweets_listener = TweetListener(api, model, keywords)
     tweet_stream = tweepy.Stream(
         api.auth, tweets_listener, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
     tweet_stream.filter(track=keywords, languages=languages,
