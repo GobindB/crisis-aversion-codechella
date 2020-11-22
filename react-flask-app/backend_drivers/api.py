@@ -1,5 +1,7 @@
 #!venv/bin/python3
 
+# TODO: DOCUMENTATION!! && TESTS
+
 from flask import (
     Flask,
     render_template,
@@ -7,21 +9,32 @@ from flask import (
 )
 
 from retrieve_tweets import get_tweets
+import numpy as np
+import tensorflow as tf
+from tensorflow import keras
+
 import os
 
 
+reconstructed_model = keras.models.load_model("my_model")
+
 # Create the application instance
-app = Flask(__name__, template_folder="templates", static_folder="../build", static_url_path='/home')
+app = Flask(__name__, template_folder="templates",
+            static_folder="../build", static_url_path='/home')
+
 
 @app.route("/home")
 def index():
     return app.send_static_file('index.html')
+
 
 @app.errorhandler(404)
 def not_found(e):
     return app.send_static_file('index.html')
 
 # Create a URL route in our application for "/"
+
+
 @app.route('/request/location=<string:location>/keywords=<string:keyword>/languages=<string:languages>', methods=['GET'])
 def home(location, keyword, languages):
     """
@@ -39,8 +52,8 @@ def home(location, keyword, languages):
     location = [float(coordinate) for coordinate in location.split(",")]
     languages = languages.split(",")
 
-    response = get_tweets(keywords, languages, location)
-    
+    response = get_tweets(keywords, languages, location, model)
+
     if len(response) > 0:
         status_code = 200
     else:
